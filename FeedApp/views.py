@@ -19,7 +19,3 @@ def index(request):
 
 
 #@login_required
-
-
-
-
