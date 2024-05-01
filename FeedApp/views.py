@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-#from .forms import PostForm,ProfileForm, RelationshipForm
-#from .models import Post, Comment, Like, Profile, Relationship
+from .forms import PostForm,ProfileForm, RelationshipForm
+from .models import Post, Comment, Like, Profile, Relationship
 from datetime import datetime, date
 
 from django.contrib.auth.decorators import login_required
@@ -19,3 +19,19 @@ def index(request):
 
 
 #@login_required
+def profile(request):
+    profile = Profile.objects.filter(user=request.user)
+    if not profile.exists():
+        Profile.objects.create(user=request.user)
+    profile = Profile.objects.get(user=request.user)
+
+    if request.method != 'POST':
+        form = ProfileForm(instance=profile)
+    else:
+        form = ProfileForm(instance=profile, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('FeedApp:profile')
+    
+    context = {'form': form}
+    return render(request, 'FeedApp/profile.html', context)
