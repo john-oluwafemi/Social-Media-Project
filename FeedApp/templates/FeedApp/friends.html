@@ -51,8 +51,8 @@
         <th>Date Sent</th>
         <th>Status</th>
     </tr>
-    {% for r in user_relationships %}
     <tr>
+        {% for r in user_relationships %}
         <td>{{ r.receiver }}</td>
         <td>{{ r.receiver.first_name }}</td>
         <td>{{ r.receiver.last_name }}</td>
@@ -86,7 +86,7 @@
         {% endfor %}
     </table>
     <br><br>
-    <button name="submit" class="btn btn-outline-primary">Send Request</button>
+    <button name="submit" class="btn btn-outline-primary" style="float: left;">Send Request</button>
     <br><br><br><br>
 </form>
 
