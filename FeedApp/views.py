@@ -18,7 +18,7 @@ def index(request):
 
 
 
-#@login_required
+@login_required
 def profile(request):
     profile = Profile.objects.filter(user=request.user)
     if not profile.exists():
